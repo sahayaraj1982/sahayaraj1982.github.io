@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Train Confirm Ticket</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    input {
+      padding: 8px;
+      margin: 5px;
+    }
+    button {
+      padding: 8px 12px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .card {
+      border: 1px solid #333;
+      padding: 10px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Train Ticket Availability</h2>
+
+  <input type="text" id="from" placeholder="From Station">
+  <input type="text" id="to" placeholder="To Station">
+
+  <br>
+
+  <button onclick="searchTrains()">Search</button>
+
+  <br>
+
+  <button onclick="filterStatus('CONFIRMED')">Confirmed</button>
+  <button onclick="filterStatus('RAC')">RAC</button>
+  <button onclick="filterStatus('WL')">Waiting List</button>
+
+  <div id="result"></div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
