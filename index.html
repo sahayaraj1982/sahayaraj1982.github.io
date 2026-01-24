@@ -1,49 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
-  <meta charset="UTF-8">
-  <title>Train Confirm Ticket</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 20px;
-    }
-    input {
-      padding: 8px;
-      margin: 5px;
-    }
-    button {
-      padding: 8px 12px;
-      margin: 5px;
-      cursor: pointer;
-    }
-    .card {
-      border: 1px solid #333;
-      padding: 10px;
-      margin: 10px 0;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Train Availability Filter</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  padding: 15px;
+}
+
+button {
+  padding: 8px 14px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.train-card {
+  border: 1px solid #333;
+  padding: 10px;
+  margin-top: 10px;
+}
+</style>
 </head>
+
 <body>
 
-  <h2>Train Ticket Availability</h2>
+<h2>Train Ticket Availability</h2>
 
-  <input type="text" id="from" placeholder="From Station">
-  <input type="text" id="to" placeholder="To Station">
+<!-- FILTER BUTTONS -->
+<button onclick="filterTrains('CONFIRMED')">Confirmed</button>
+<button onclick="filterTrains('RAC')">RAC</button>
+<button onclick="filterTrains('WL')">Waiting List</button>
+<button onclick="filterTrains('ALL')">All</button>
 
-  <br>
+<!-- TRAIN LIST -->
+<div class="train-card" data-status="CONFIRMED">
+  <b>Nellai Express</b><br>
+  Train No: 12631<br>
+  Class: 3A<br>
+  Status: CONFIRMED<br>
+  Seats: 12
+</div>
 
-  <button onclick="searchTrains()">Search</button>
+<div class="train-card" data-status="RAC">
+  <b>Pandian Express</b><br>
+  Train No: 12637<br>
+  Class: SL<br>
+  Status: RAC<br>
+  Seats: 6
+</div>
 
-  <br>
+<div class="train-card" data-status="WL">
+  <b>Vaigai Express</b><br>
+  Train No: 12635<br>
+  Class: CC<br>
+  Status: WL<br>
+  Seats: 15
+</div>
 
-  <button onclick="filterStatus('CONFIRMED')">Confirmed</button>
-  <button onclick="filterStatus('RAC')">RAC</button>
-  <button onclick="filterStatus('WL')">Waiting List</button>
+<script>
+function filterTrains(status) {
+  const cards = document.querySelectorAll(".train-card");
 
-  <div id="result"></div>
-
-  <script src="script.js"></script>
+  cards.forEach(card => {
+    if (status === "ALL") {
+      card.style.display = "block";
+    } else {
+      card.style.display =
+        card.dataset.status === status ? "block" : "none";
+    }
+  });
+}
+</script>
 
 </body>
 </html>
