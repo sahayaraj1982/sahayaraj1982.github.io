@@ -1,78 +1,75 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f5f5f5;
   padding: 15px;
 }
 
-h2 {
-  text-align: center;
+.search-box input,
+.search-box button {
+  padding: 8px;
+  margin: 5px 0;
+  width: 100%;
 }
 
-input {
-  width: 45%;
-  padding: 10px;
-  margin: 5px 2%;
-  box-sizing: border-box;
+.filter-box {
+  margin: 15px 0;
 }
 
-button {
-  padding: 10px 14px;
-  margin: 6px 3px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.switch {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.label-text {
+  margin-left: 10px;
   font-size: 14px;
 }
 
-/* Filter buttons */
-button:nth-of-type(2) {
-  background: #2ecc71;
-  color: #fff;
+.switch input {
+  display: none;
 }
 
-button:nth-of-type(3) {
-  background: #f1c40f;
-  color: #000;
+.slider {
+  width: 42px;
+  height: 22px;
+  background: #ccc;
+  border-radius: 22px;
+  position: relative;
+  cursor: pointer;
 }
 
-button:nth-of-type(4) {
-  background: #e74c3c;
-  color: #fff;
-}
-
-/* Result cards */
-.card {
+.slider::before {
+  content: "";
+  width: 18px;
+  height: 18px;
   background: #fff;
-  border-radius: 8px;
-  padding: 12px;
-  margin: 10px 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  transition: 0.3s;
 }
 
-/* Status colors */
-.status-CONFIRMED {
-  color: #2ecc71;
-  font-weight: bold;
+.switch input:checked + .slider {
+  background: #4cd964;
 }
 
-.status-RAC {
-  color: #f1c40f;
-  font-weight: bold;
+.switch input:checked + .slider::before {
+  transform: translateX(20px);
 }
 
-.status-WL {
-  color: #e74c3c;
-  font-weight: bold;
+button {
+  padding: 10px;
+  width: 100%;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
 }
 
-/* Mobile friendly */
-@media (max-width: 600px) {
-  input {
-    width: 100%;
-    margin: 6px 0;
-  }
-
-  button {
-    width: 100%;
-  }
+.train-row {
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 8px;
+  border-radius: 4px;
 }
