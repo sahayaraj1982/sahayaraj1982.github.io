@@ -1,30 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Train Availability</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div class="filters">
 
-<h3>Train Search</h3>
+<label class="switch">
+  <input type="checkbox" class="filter" value="CONFIRMED">
+  <span class="slider"></span>
+  <span class="text">Confirm</span>
+</label>
 
-From: <input type="text" id="from" value="Madurai"><br><br>
-To: <input type="text" id="to" value="Chennai"><br><br>
-Date: <input type="date" id="date"><br><br>
+<label class="switch">
+  <input type="checkbox" class="filter" value="RAC">
+  <span class="slider"></span>
+  <span class="text">RAC</span>
+</label>
 
-<label><input type="checkbox" class="filter" value="CONFIRMED"> Confirm</label><br>
-<label><input type="checkbox" class="filter" value="RAC"> RAC</label><br>
-<label><input type="checkbox" class="filter" value="WL"> Waiting</label><br>
-<label><input type="checkbox" class="filter" value="CURRENT"> Current Availability</label><br><br>
+<label class="switch">
+  <input type="checkbox" class="filter" value="WL">
+  <span class="slider"></span>
+  <span class="text">Waiting</span>
+</label>
 
-<button onclick="searchTrain()">Search</button>
+<label class="switch">
+  <input type="checkbox" class="filter" value="CURRENT">
+  <span class="slider"></span>
+  <span class="text">Current Availability</span>
+</label>
 
-<hr>
-
-<div id="result"></div>
-
-<script src="data.js"></script>
-<script src="logic.js"></script>
-
-</body>
-</html>
+</div>
