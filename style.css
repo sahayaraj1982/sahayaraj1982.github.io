@@ -1,23 +1,56 @@
-function searchTrain() {
-  const selected = [...document.querySelectorAll('.filter:checked')]
-                    .map(cb => cb.value);
+.filters {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 
-  let output = "";
+/* switch container */
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
 
-  trains.forEach(t => {
-    if (selected.length === 0 || selected.includes(t.status) || selected.includes("CURRENT")) {
-      output += `
-        <div class="result-box">
-          <b>${t.from} to ${t.to}</b><br>
-          ${t.name} (${t.number})<br>
-          Time: ${t.time}<br>
-          Status: <span class="green">${t.status}</span><br>
-          Available: <span class="green">${t.availability}</span>
-        </div><br>
-      `;
-    }
-  });
+/* hide checkbox */
+.switch input {
+  display: none;
+}
 
-  document.getElementById("result").innerHTML =
-    output || "No trains available";
+/* slider */
+.slider {
+  width: 38px;
+  height: 20px;
+  background: #ccc;
+  border-radius: 20px;
+  position: relative;
+  transition: 0.3s;
+}
+
+/* knob */
+.slider::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s;
+}
+
+/* ON state */
+.switch input:checked + .slider {
+  background: #1aa64a;   /* GREEN */
+}
+
+.switch input:checked + .slider::before {
+  transform: translateX(18px);
+}
+
+/* text green when ON */
+.switch input:checked ~ .text {
+  color: #1aa64a;
+  font-weight: bold;
 }
