@@ -1,21 +1,56 @@
-function applyFilter() {
-  const showConfirm = document.getElementById("confirmToggle").checked;
-  const showRAC = document.getElementById("racToggle").checked;
-  const showWL = document.getElementById("wlToggle").checked;
+const trains = [
+  {
+    number: "12636",
+    name: "Vaigai Express",
+    from: "madurai",
+    to: "chennai",
+    CONFIRMED: 12,
+    RAC: 4,
+    WL: 0
+  },
+  {
+    number: "12638",
+    name: "Pandian Express",
+    from: "madurai",
+    to: "chennai",
+    CONFIRMED: 0,
+    RAC: 6,
+    WL: 15
+  }
+];
 
-  const rows = document.querySelectorAll(".train-row");
+function searchTickets() {
+  const from = document.getElementById("from").value.toLowerCase();
+  const to = document.getElementById("to").value.toLowerCase();
+  const trainNo = document.getElementById("train").value;
+  const status = document.querySelector('input[name="status"]:checked');
+  const result = document.getElementById("result");
 
-  rows.forEach(row => {
-    const status = row.getAttribute("data-status");
+  result.innerHTML = "";
 
-    if (
-      (status === "CONFIRMED" && showConfirm) ||
-      (status === "RAC" && showRAC) ||
-      (status === "WL" && showWL)
-    ) {
-      row.style.display = "block";
-    } else {
-      row.style.display = "none";
-    }
-  });
+  if (!from || !to || !trainNo || !status) {
+    result.innerHTML = "Please fill all fields";
+    return;
+  }
+
+  const selectedTrain = trains.find(t =>
+    t.number === trainNo &&
+    t.from.includes(from) &&
+    t.to.includes(to)
+  );
+
+  if (!selectedTrain) {
+    result.innerHTML = "No train found";
+    return;
+  }
+
+  const seats = selectedTrain[status.value];
+
+  result.innerHTML = `
+    <div class="train">
+      <b>${selectedTrain.number} – ${selectedTrain.name}</b><br><br>
+      Status : ${status.value}<br>
+      Available Seats : ${seats}
+    </div>
+  `;
 }
