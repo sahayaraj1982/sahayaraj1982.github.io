@@ -1,26 +1,23 @@
-body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-}
+function searchTrain() {
+  const selected = [...document.querySelectorAll('.filter:checked')]
+                    .map(cb => cb.value);
 
-input, select, button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-}
+  let output = "";
 
-.switches {
-  margin-top: 15px;
-}
+  trains.forEach(t => {
+    if (selected.length === 0 || selected.includes(t.status) || selected.includes("CURRENT")) {
+      output += `
+        <div class="result-box">
+          <b>${t.from} to ${t.to}</b><br>
+          ${t.name} (${t.number})<br>
+          Time: ${t.time}<br>
+          Status: <span class="green">${t.status}</span><br>
+          Available: <span class="green">${t.availability}</span>
+        </div><br>
+      `;
+    }
+  });
 
-.switches label {
-  display: block;
-  margin: 5px 0;
-}
-
-.train {
-  border: 1px solid #ccc;
-  padding: 15px;
-  margin-top: 20px;
-  border-radius: 5px;
+  document.getElementById("result").innerHTML =
+    output || "No trains available";
 }
