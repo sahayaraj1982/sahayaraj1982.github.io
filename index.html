@@ -2,57 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Train Confirm Ticket Demo</title>
+  <title>Train Ticket Search</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h2>Train Ticket Search (Demo)</h2>
+<h2>Train Ticket Search</h2>
 
-  <!-- Search Section -->
-  <div class="search-box">
-    <input type="text" placeholder="From">
-    <input type="text" placeholder="To">
-    <input type="date">
-    <button onclick="searchTrains()">Search</button>
-  </div>
+<input type="text" id="from" placeholder="From">
+<input type="text" id="to" placeholder="To">
+<input type="date" id="date">
 
-  <!-- Filter Section -->
-  <div class="filter-box">
-    <label class="switch">
-      <input type="checkbox" id="confirmToggle" checked>
-      <span class="slider"></span>
-      <span class="label-text">Confirmed</span>
-    </label>
+<select id="train">
+  <option value="">Select Train</option>
+  <option value="12636">12636 – Vaigai Express</option>
+  <option value="12638">12638 – Pandian Express</option>
+</select>
 
-    <label class="switch">
-      <input type="checkbox" id="racToggle" checked>
-      <span class="slider"></span>
-      <span class="label-text">RAC</span>
-    </label>
+<div class="switches">
+  <label>
+    <input type="radio" name="status" value="CONFIRMED">
+    Confirmed
+  </label>
+  <label>
+    <input type="radio" name="status" value="RAC">
+    RAC
+  </label>
+  <label>
+    <input type="radio" name="status" value="WL">
+    Waiting List
+  </label>
+</div>
 
-    <label class="switch">
-      <input type="checkbox" id="wlToggle" checked>
-      <span class="slider"></span>
-      <span class="label-text">Waiting List</span>
-    </label>
-  </div>
+<button onclick="searchTickets()">OK</button>
 
-  <!-- Result Section -->
-  <div id="results">
-    <div class="train-row" data-status="CONFIRMED">
-      12636 – Vaigai Express – CONFIRMED
-    </div>
+<div id="result"></div>
 
-    <div class="train-row" data-status="RAC">
-      12083 – Jan Shatabdi – RAC
-    </div>
-
-    <div class="train-row" data-status="WL">
-      16127 – Guruvayur Exp – WAITING LIST
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
