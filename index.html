@@ -1,43 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Train Ticket Search</title>
+  <title>Train Availability</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Train Ticket Search</h2>
+<h3>Train Search</h3>
 
-<input type="text" id="from" placeholder="From">
-<input type="text" id="to" placeholder="To">
-<input type="date" id="date">
+From: <input type="text" id="from" value="Madurai"><br><br>
+To: <input type="text" id="to" value="Chennai"><br><br>
+Date: <input type="date" id="date"><br><br>
 
-<select id="train">
-  <option value="">Select Train</option>
-  <option value="12636">12636 – Vaigai Express</option>
-  <option value="12638">12638 – Pandian Express</option>
-</select>
+<label><input type="checkbox" class="filter" value="CONFIRMED"> Confirm</label><br>
+<label><input type="checkbox" class="filter" value="RAC"> RAC</label><br>
+<label><input type="checkbox" class="filter" value="WL"> Waiting</label><br>
+<label><input type="checkbox" class="filter" value="CURRENT"> Current Availability</label><br><br>
 
-<div class="switches">
-  <label>
-    <input type="radio" name="status" value="CONFIRMED">
-    Confirmed
-  </label>
-  <label>
-    <input type="radio" name="status" value="RAC">
-    RAC
-  </label>
-  <label>
-    <input type="radio" name="status" value="WL">
-    Waiting List
-  </label>
-</div>
+<button onclick="searchTrain()">Search</button>
 
-<button onclick="searchTickets()">OK</button>
+<hr>
 
 <div id="result"></div>
 
-<script src="script.js"></script>
+<script src="data.js"></script>
+<script src="logic.js"></script>
+
 </body>
 </html>
