@@ -1,27 +1,134 @@
-<div class="filters">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Train Availability Filter</title>
 
-<label class="switch">
-  <input type="checkbox" class="filter" value="CONFIRMED">
-  <span class="slider"></span>
-  <span class="text">Confirm</span>
-</label>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f4f7;
+    margin: 0;
+    padding: 10px;
+}
+.container {
+    max-width: 500px;
+    margin: auto;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+}
+h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    font-size: 16px;
+}
+.filters {
+    margin: 10px 0;
+}
+.filters label {
+    display: block;
+    margin: 6px 0;
+    font-size: 15px;
+}
+button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+button:hover {
+    background: #0056b3;
+}
+.result {
+    margin-top: 15px;
+    display: none;
+}
+.card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+.status {
+    font-weight: bold;
+}
+.confirm { color: green; }
+.rac { color: orange; }
+.current { color: blue; }
+</style>
+</head>
 
-<label class="switch">
-  <input type="checkbox" class="filter" value="RAC">
-  <span class="slider"></span>
-  <span class="text">RAC</span>
-</label>
+<body>
 
-<label class="switch">
-  <input type="checkbox" class="filter" value="WL">
-  <span class="slider"></span>
-  <span class="text">Waiting</span>
-</label>
+<div class="container">
+    <h2>Train Availability</h2>
 
-<label class="switch">
-  <input type="checkbox" class="filter" value="CURRENT">
-  <span class="slider"></span>
-  <span class="text">Current Availability</span>
-</label>
+    <!-- Editable Inputs -->
+    <input type="date" id="date">
+    <input type="text" id="from" placeholder="From">
+    <input type="text" id="to" placeholder="To">
 
+    <!-- Filters -->
+    <div class="filters">
+        <label><input type="checkbox" id="confirm"> Confirm Available</label>
+        <label><input type="checkbox" id="rac"> RAC</label>
+        <label><input type="checkbox" id="current"> Current Availability</label>
+    </div>
+
+    <!-- OK Button -->
+    <button onclick="showResult()">OK</button>
+
+    <!-- Result Section -->
+    <div class="result" id="result">
+        <div id="resultData"></div>
+    </div>
 </div>
+
+<script>
+const trains = [
+    { name: "12637 Pandian Express", status: "Confirm", class: "Sleeper" },
+    { name: "12007 Shatabdi", status: "RAC", class: "AC Chair Car" },
+    { name: "16127 Guruvayur Exp", status: "Current", class: "Sleeper" }
+];
+
+function showResult() {
+    const confirm = document.getElementById("confirm").checked;
+    const rac = document.getElementById("rac").checked;
+    const current = document.getElementById("current").checked;
+
+    let html = "";
+    let show = false;
+
+    trains.forEach(train => {
+        if (
+            (confirm && train.status === "Confirm") ||
+            (rac && train.status === "RAC") ||
+            (current && train.status === "Current")
+        ) {
+            show = true;
+            let cls = train.status === "Confirm" ? "confirm" :
+                      train.status === "RAC" ? "rac" : "current";
+
+            html += `
+            <div class="card">
+                <div><b>${train.name}</b></div>
+                <div>Class: ${train.class}</div>
+                <div class="status ${cls}">${train.status}</div>
+            </div>`;
+        }
+    });
+
+    document.getElementById("result").style.display = show ? "block" : "none";
+    document.getElementById("resultData").innerHTML = show ? html : "";
+}
+</script>
+
+</body>
+</html>
