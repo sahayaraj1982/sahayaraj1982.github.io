@@ -1,54 +1,26 @@
-const trains = [
-  {
-    from: "Madurai",
-    to: "Chennai",
-    name: "Pandian Express",
-    number: "12637",
-    time: "21:30 PM",
-    status: "RAC",
-    availability: 12
-  }
-];
-const express = require("express");
-const fetch = require("node-fetch");
-const cors = require("cors");
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.querySelector("button");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+  btn.addEventListener("click", () => {
+    let old = document.getElementById("result");
+    if (old) old.remove();
 
-const API_KEY = "YOUR_RAPIDAPI_KEY";
-const API_HOST = "irctc-insight.p.rapidapi.com";
+    const result = document.createElement("div");
+    result.id = "result";
+    result.style.marginTop = "20px";
+    result.style.padding = "15px";
+    result.style.border = "1px solid #ccc";
+    result.style.borderRadius = "8px";
+    result.style.background = "#f9f9f9";
 
-app.post("/api/trains", async (req, res) => {
-  const { from, to, date } = req.body;
+    result.innerHTML = `
+      <h3>✅ Confirm Tickets Available</h3>
+      <p><b>Train:</b> Pandian Express (12638)</p>
+      <p><b>Class:</b> Sleeper</p>
+      <p><b>Quota:</b> General</p>
+      <p><b>Seats:</b> 5 Confirmed</p>
+    `;
 
-  try {
-    const response = await fetch(
-      "https://irctc-insight.p.rapidapi.com/getTrainDetails",
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "X-RapidAPI-Key": API_KEY,
-          "X-RapidAPI-Host": API_HOST
-        },
-        body: JSON.stringify({
-          fromStationCode: from,
-          toStationCode: to,
-          journeyDate: date
-        })
-      }
-    );
-
-    const data = await response.json();
-    res.json(data);
-
-  } catch (err) {
-    res.status(500).json({ error: "API failed" });
-  }
-});
-
-app.listen(3000, () => {
-  console.log("Backend running on http://localhost:3000");
+    btn.parentElement.appendChild(result);
+  });
 });
